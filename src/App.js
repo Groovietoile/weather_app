@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
+import SignInSignUp from "./components/SignInSignUp/SignInSignUp";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <h1>Weather App</h1>
       </header>
       <main>
+        <SignInSignUp/>
         <Forecast />
       </main>
       <footer>
