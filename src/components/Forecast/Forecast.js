@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
+import classes from './Forecast.module.css';
 
 const Forecast = () => {
     let [responseObj, setResponseObj] = useState({});
     let [responseStatus, setResponseStatus] = useState({});
-    function getForecast() {
+    let [city, setCity] = useState('');
+    const uriEncodedCity = encodeURIComponent(city);
+
+    function getForecast(e) {
+        e.preventDefault();
         const options = {
             method: 'GET',
             headers: {
@@ -12,6 +17,10 @@ const Forecast = () => {
                 'X-RapidAPI-Host': 'aerisweather1.p.rapidapi.com'
             }
         };
+        if (!city) {
+            return;
+        }
+        // fetch(`https://aerisweather1.p.rapidapi.com/observations/${uriEncodedCity}`, options)
         fetch('https://aerisweather1.p.rapidapi.com/observations/paris,fr', options)
             .then(response => {
                 setResponseStatus(response.status);
@@ -22,10 +31,11 @@ const Forecast = () => {
                 console.log(err.message);
             });
     }
+
     return (
         <div>
             <h2>Find Current Weather Conditions</h2>
-            <button onClick={getForecast}>Get Forecast</button>
+            {/* <button onClick={getForecast}>Get Forecast</button>
             {
                 responseStatus && responseObj && (
                     <Conditions
@@ -33,7 +43,26 @@ const Forecast = () => {
                         responseStatus={responseStatus}
                     />                   
                 )
-            }
+            } */}
+
+            <form>
+                <input
+                    type="text"
+                    placeholder="Enter City"
+                    maxLength="50"
+                    className={classes.textInput}
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                />
+                <button className={classes.Button} onClick={getForecast}>Get Forecast</button>
+            </form>
+            {responseStatus && responseObj && (
+                <Conditions
+                    responseObj={responseObj}
+                    responseStatus={responseStatus}
+                />
+            )}
+
         </div>
     )
 }

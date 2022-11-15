@@ -6,7 +6,7 @@ const Conditions = (props) => {
            {props.responseStatus === 200 && props.responseObj ?
                <div>
                    <p><strong>{props.responseObj.response?.place?.name}</strong></p>
-                   <p>It is currently {Math.round(props.responseObj.response?.ob?.tempC)} degrees out with {props.responseObj.response?.ob?.weather}.</p>
+                   <p>It is currently {Math.round(props.responseObj.response?.ob?.tempC)} °C out with {props.responseObj.response?.ob?.weather}.</p>
                </div>
            : null
            }
