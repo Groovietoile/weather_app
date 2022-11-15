@@ -4,7 +4,7 @@ import Conditions from '../Conditions/Conditions';
 const Forecast = () => {
     let [responseObj, setResponseObj] = useState({});
     let [responseStatus, setResponseStatus] = useState({});
-    async function getForecast() {
+    function getForecast() {
         const options = {
             method: 'GET',
             headers: {
@@ -12,19 +12,28 @@ const Forecast = () => {
                 'X-RapidAPI-Host': 'aerisweather1.p.rapidapi.com'
             }
         };
-        const response = await fetch('https://aerisweather1.p.rapidapi.com/observations/paris,fr', options);
-        setResponseStatus(response.status);
-        const responseJson = await response.json();
-        setResponseObj(responseJson);
+        fetch('https://aerisweather1.p.rapidapi.com/observations/paris,fr', options)
+            .then(response => {
+                setResponseStatus(response.status);
+                return response.json();
+            })
+            .then(data => setResponseObj(data))
+            .catch(err => {
+                console.log(err.message);
+            });
     }
     return (
         <div>
             <h2>Find Current Weather Conditions</h2>
             <button onClick={getForecast}>Get Forecast</button>
-            <Conditions
-                responseObj={responseObj}
-                responseStatus={responseStatus}
-            />
+            {
+                responseStatus && responseObj && (
+                    <Conditions
+                        responseObj={responseObj}
+                        responseStatus={responseStatus}
+                    />                   
+                )
+            }
         </div>
     )
 }
