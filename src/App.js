@@ -1,34 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link, withRouter } from "react-router-dom";
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import SignInSignUp from "./components/SignInSignUp/SignInSignUp";
+import Favorites from "./components/Favorites/Favorites";
 
 
-const App = () => (
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/signinsignup">Sign in/ Sign up</Link>
-        </li>
-        <li>
-          <Link to="/forecast">Forecast</Link>
-        </li>
-      </ul>
+const App = () => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [link, setLink] = useState("");
 
-      <hr />
-      <Switch>
-        <Route exact path="/" component={withRouter(Home)} />
-        <Route path="/signinsignup" component={withRouter(SignInSignUp)} />
-        <Route path="/forecast" component={withRouter(Forecast)} />
-      </Switch>
-    </div>
-  </Router>
-);
+  return (
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/" onClick={() => window.location.href='http://localhost:3000/'}>Home</Link>
+          </li>
+          {isSignedIn ? (
+            <li>
+              <Link to="/favorites" onClick={() => window.location.href='http://localhost:3000/favorites'}>Favorites</Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="/signinsignup" onClick={() => window.location.href='http://localhost:3000/signinsignup'}>Sign in/ Sign up</Link>
+            </li>
+          )}
+
+          <li>
+            <Link to="/forecast" onClick={() => window.location.href='http://localhost:3000/forecast'}>Forecast</Link>
+          </li>
+        </ul>
+
+        <hr />
+        <Switch>
+          <Route exact path="/" component={withRouter(Home)} />
+          <Route path="/signinsignup" component={withRouter(SignInSignUp)} />
+          <Route path="/forecast" component={withRouter(Forecast)} />
+          <Route path="/favorites" component={withRouter(Favorites)} />
+        </Switch>
+      </div>
+    </Router>
+  );
+}
 
 const Home = () => (
   <div className="App">

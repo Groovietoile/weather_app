@@ -3,9 +3,9 @@ import Conditions from '../Conditions/Conditions';
 import classes from './Forecast.module.css';
 
 const Forecast = () => {
-    let [responseObj, setResponseObj] = useState({});
-    let [responseStatus, setResponseStatus] = useState({});
-    let [city, setCity] = useState('');
+    const [responseObj, setResponseObj] = useState({});
+    const [responseStatus, setResponseStatus] = useState({});
+    const [city, setCity] = useState('');
     // const uriEncodedCity = encodeURIComponent(city);
 
     function getForecastAt(location) {
