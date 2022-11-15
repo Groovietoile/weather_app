@@ -20,8 +20,7 @@ const Forecast = () => {
         if (!city) {
             return;
         }
-        // fetch(`https://aerisweather1.p.rapidapi.com/observations/${uriEncodedCity}`, options)
-        fetch('https://aerisweather1.p.rapidapi.com/observations/paris,fr', options)
+        fetch(`https://aerisweather1.p.rapidapi.com/observations/${uriEncodedCity}`, options)
             .then(response => {
                 setResponseStatus(response.status);
                 return response.json();
@@ -35,16 +34,6 @@ const Forecast = () => {
     return (
         <div>
             <h2>Find Current Weather Conditions</h2>
-            {/* <button onClick={getForecast}>Get Forecast</button>
-            {
-                responseStatus && responseObj && (
-                    <Conditions
-                        responseObj={responseObj}
-                        responseStatus={responseStatus}
-                    />                   
-                )
-            } */}
-
             <form>
                 <input
                     type="text"
@@ -62,7 +51,6 @@ const Forecast = () => {
                     responseStatus={responseStatus}
                 />
             )}
-
         </div>
     )
 }
