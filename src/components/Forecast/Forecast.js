@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
 import classes from './Forecast.module.css';
 
-const Forecast = () => {
+const Forecast = (props) => {
     const [responseObj, setResponseObj] = useState({});
     const [responseStatus, setResponseStatus] = useState({});
     const [city, setCity] = useState('');
 
-    function emptyResponse(){
+    function emptyResponse() {
         setCity('');
         setResponseStatus({});
         setResponseObj({});
@@ -85,6 +85,12 @@ const Forecast = () => {
                     console.log("get forecast at ", city);
                     getForecastAt(encodeURIComponent(city));
                 }}>Get Forecast</button>
+                {props.isSignedIn && (
+                    <button className={classes.Button} onClick={(e) => {
+                        e.preventDefault();
+                        // TODO
+                    }}>Add searched city to favorites</button>
+                )}
                 <button className={classes.Button} onClick={getForecastAtMyLocation}>Get Forecast at my location</button>
             </form>
             {(responseStatus === 200) && responseObj && (
