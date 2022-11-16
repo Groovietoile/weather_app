@@ -1,0 +1,34 @@
+{
+    "users": [
+        {
+            "id": "u1",
+            "username": "test",
+            "password": "test",
+            "favorites": [
+                {
+                    "id": "f1",
+                    "city": "paris, fr"
+                },
+                {
+                    "id": "f2",
+                    "city": "berlin, de"
+                }
+            ]
+        },
+        {
+            "id": "u2",
+            "username": "test2",
+            "password": "test2",
+            "favorites": [
+                {
+                    "id": "f1",
+                    "city": "new york, us"
+                },
+                {
+                    "id": "f2",
+                    "city": "montreal, canada"
+                }
+            ]
+        }
+    ]
+}

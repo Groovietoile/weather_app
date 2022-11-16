@@ -17,7 +17,7 @@ const Favorites = (props) => {
                 );
             })}</div>
             <button onClick={() => {
-                // TODO
+                // TODO : replace user's favorites in db by favorites array
             }}>Save</button>
         </>
     );

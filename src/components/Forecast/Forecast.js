@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
 import classes from './Forecast.module.css';
+import {v4 as uuidv4} from 'uuid';
 
 const Forecast = (props) => {
     const [responseObj, setResponseObj] = useState({});
@@ -88,7 +89,11 @@ const Forecast = (props) => {
                 {props.isSignedIn && (
                     <button className={classes.Button} onClick={(e) => {
                         e.preventDefault();
-                        // TODO
+                        // TODO : add city to user's favorites in db
+                        // {
+                        //     id: uuidv4(),
+                        //     city: city
+                        // }
                     }}>Add searched city to favorites</button>
                 )}
                 <button className={classes.Button} onClick={getForecastAtMyLocation}>Get Forecast at my location</button>

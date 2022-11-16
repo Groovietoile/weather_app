@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link, withRouter } from "react-router-dom";
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
@@ -9,39 +9,33 @@ import Favorites from "./components/Favorites/Favorites";
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [userId, setUserId] = useState("u1");
-  const mockDb = {
-    users: [
-      {
-        id: "u1",
-        username: "test",
-        password: "test",
-        favorites: [
-          {
-            id: "f1",
-            city: "paris, fr"
-          },
-          {
-            id: "f2",
-            city: "berlin, de"
-          }]
-      },
-      {
-        id: "u2",
-        username: "test2",
-        password: "test2",
-        favorites: [
-          {
-            id: "f1",
-            city: "new york, us"
-          },
-          {
-            id: "f2",
-            city: "montreal, canada"
-          }
-        ]
-      }
-    ]
+  const [userFavorites, setUserFavorites] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  const renderUsers = () => {
+    fetch('http://localhost:8000/users')
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setUsers(data);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   }
+
+  useEffect(() => {
+    renderUsers();
+  }, []);
+
+  useEffect(() => {
+    if (!users || !userId) {
+      return;
+    }
+    setUserFavorites(users.filter((user) => user.id === userId)?.map((signedInUser) => signedInUser.favorites)[0]);
+    console.log(userFavorites);
+  }, [users, userId]);
 
   return (
     <Router>
@@ -70,7 +64,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route path="/signinsignup" component={SignInSignUp} />
           <Route path="/forecast" component={() => (<Forecast isSignedIn={isSignedIn} />)} />
-          <Route path="/favorites" component={() => (<Favorites favorites={mockDb.users.filter((user) => user.id === userId)?.map((signedInUser) => signedInUser.favorites)[0]} />)} />
+          <Route path="/favorites" component={() => (<Favorites favorites={userFavorites} />)} />
         </Switch>
       </div>
     </Router>
