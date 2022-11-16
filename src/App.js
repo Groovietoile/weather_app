@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link, withRouter } from "react-router-dom";
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
@@ -8,7 +8,6 @@ import Favorites from "./components/Favorites/Favorites";
 
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [link, setLink] = useState("");
 
   return (
     <Router>
