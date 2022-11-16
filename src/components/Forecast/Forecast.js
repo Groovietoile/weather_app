@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
 import classes from './Forecast.module.css';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 const Forecast = (props) => {
     const [responseObj, setResponseObj] = useState({});
@@ -69,6 +69,15 @@ const Forecast = (props) => {
             })
     }
 
+    function getUpdatedFavorites() {
+        let favorites = props.userFavorites;
+        favorites.push({
+            id: uuidv4(),
+            city
+        })
+        return JSON.stringify({favorites});
+    }
+
     return (
         <div>
             <h2>Find Current Weather Conditions</h2>
@@ -89,11 +98,14 @@ const Forecast = (props) => {
                 {props.isSignedIn && (
                     <button className={classes.Button} onClick={(e) => {
                         e.preventDefault();
-                        // TODO : add city to user's favorites in db
-                        // {
-                        //     id: uuidv4(),
-                        //     city: city
-                        // }
+                        fetch(`http://localhost:8000/users/${props.userId}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: getUpdatedFavorites()
+                        }).then(res => res.json())
+                            .then(res => alert("added to favorites successfully !"));
                     }}>Add searched city to favorites</button>
                 )}
                 <button className={classes.Button} onClick={getForecastAtMyLocation}>Get Forecast at my location</button>

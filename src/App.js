@@ -7,8 +7,8 @@ import Favorites from "./components/Favorites/Favorites";
 
 
 const App = () => {
-  const [isSignedIn, setIsSignedIn] = useState(true);
-  const [userId, setUserId] = useState("u1");
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [userId, setUserId] = useState("");
   const [userFavorites, setUserFavorites] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -42,28 +42,33 @@ const App = () => {
       <div>
         <ul>
           <li>
-            <Link to="/" onClick={() => window.location.href = 'http://localhost:3000/'}>Home</Link>
+            <Link to="/" >Home</Link>
           </li>
           {isSignedIn ? (
             <li>
-              <Link to="/favorites" onClick={() => window.location.href = 'http://localhost:3000/favorites'}>Favorites</Link>
+              <Link to="/favorites">Favorites</Link>
             </li>
           ) : (
             <li>
-              <Link to="/signinsignup" onClick={() => window.location.href = 'http://localhost:3000/signinsignup'}>Sign in/ Sign up</Link>
+              <Link to="/signinsignup" >Sign in/ Sign up</Link>
             </li>
           )}
 
           <li>
-            <Link to="/forecast" onClick={() => window.location.href = 'http://localhost:3000/forecast'}>Forecast</Link>
+            <Link to="/forecast" >Forecast</Link>
           </li>
         </ul>
 
         <hr />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/signinsignup" component={SignInSignUp} />
-          <Route path="/forecast" component={() => (<Forecast isSignedIn={isSignedIn} />)} />
+          <Route path="/signinsignup" component={() => (
+            <SignInSignUp
+              setIsSignedIn={setIsSignedIn}
+              users={users}
+              setUserId={setUserId}
+            />)} />
+          <Route path="/forecast" component={() => (<Forecast isSignedIn={isSignedIn} userId={userId} userFavorites={userFavorites}/>)} />
           <Route path="/favorites" component={() => (<Favorites favorites={userFavorites} />)} />
         </Switch>
       </div>

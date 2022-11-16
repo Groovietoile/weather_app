@@ -1,34 +1,48 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "u1",
+      "username": "test",
+      "password": "test",
+      "favorites": [
         {
-            "id": "u1",
-            "username": "test",
-            "password": "test",
-            "favorites": [
-                {
-                    "id": "f1",
-                    "city": "paris, fr"
-                },
-                {
-                    "id": "f2",
-                    "city": "berlin, de"
-                }
-            ]
+          "id": "i1",
+          "city": "c1"
         },
         {
-            "id": "u2",
-            "username": "test2",
-            "password": "test2",
-            "favorites": [
-                {
-                    "id": "f1",
-                    "city": "new york, us"
-                },
-                {
-                    "id": "f2",
-                    "city": "montreal, canada"
-                }
-            ]
+          "id": "54cbeb8e-b0a3-4174-9926-78b5a28dd017",
+          "city": {
+            "city": "bordeau, fr"
+          }
+        },
+        {
+          "id": "298fcfa9-4411-432b-a15a-d3b39a89a846",
+          "city": "a"
+        },
+        {
+          "id": "b8d6f589-8f9e-4bdb-9385-7531ea7c753e",
+          "city": "b"
+        },
+        {
+          "id": "0def6ca3-5d27-44c0-85b3-ce5c46cf18ba",
+          "city": "c"
         }
-    ]
+      ]
+    },
+    {
+      "id": "u2",
+      "username": "test2",
+      "password": "test2",
+      "favorites": [
+        {
+          "id": "f1",
+          "city": "new york, us"
+        },
+        {
+          "id": "f2",
+          "city": "montreal, canada"
+        }
+      ]
+    }
+  ]
 }
