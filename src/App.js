@@ -33,8 +33,11 @@ const App = () => {
     if (!users || !userId) {
       return;
     }
-    setUserFavorites(users.filter((user) => user.id === userId)?.map((signedInUser) => signedInUser.favorites)[0]);
-    console.log(userFavorites);
+    let currentUser = users.filter((user) => user.id === userId);
+    let currentUserFavorites = currentUser?.map((signedInUser) => signedInUser.favorites)[0];
+    if(currentUserFavorites){
+      setUserFavorites(currentUserFavorites);
+    }
   }, [users, userId]);
 
   return (
@@ -69,7 +72,7 @@ const App = () => {
               setUserId={setUserId}
             />)} />
           <Route path="/forecast" component={() => (<Forecast isSignedIn={isSignedIn} userId={userId} userFavorites={userFavorites}/>)} />
-          <Route path="/favorites" component={() => (<Favorites favorites={userFavorites} />)} />
+          <Route path="/favorites" component={() => (<Favorites favorites={userFavorites} userId={userId}/>)} />
         </Switch>
       </div>
     </Router>
