@@ -5,7 +5,6 @@ import Forecast from "./components/Forecast/Forecast";
 import SignInSignUp from "./components/SignInSignUp/SignInSignUp";
 import Favorites from "./components/Favorites/Favorites";
 
-
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [userId, setUserId] = useState("");
@@ -35,7 +34,7 @@ const App = () => {
     }
     let currentUser = users.filter((user) => user.id === userId);
     let currentUserFavorites = currentUser?.map((signedInUser) => signedInUser.favorites)[0];
-    if(currentUserFavorites){
+    if (currentUserFavorites) {
       setUserFavorites(currentUserFavorites);
     }
   }, [users, userId]);
@@ -71,8 +70,20 @@ const App = () => {
               users={users}
               setUserId={setUserId}
             />)} />
-          <Route path="/forecast" component={() => (<Forecast isSignedIn={isSignedIn} userId={userId} userFavorites={userFavorites}/>)} />
-          <Route path="/favorites" component={() => (<Favorites favorites={userFavorites} userId={userId}/>)} />
+          <Route path="/forecast" component={() => (
+            <Forecast
+              isSignedIn={isSignedIn}
+              userId={userId}
+              userFavorites={userFavorites}
+            />)}
+          />
+          <Route path="/favorites" component={() => (
+            <Favorites
+              favorites={userFavorites}
+              setUserFavorites={setUserFavorites}
+              userId={userId}
+            />)}
+          />
         </Switch>
       </div>
     </Router>

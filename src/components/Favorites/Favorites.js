@@ -27,7 +27,10 @@ const Favorites = (props) => {
                     },
                     body: JSON.stringify({favorites})
                 }).then(res => res.json())
-                    .then(res => alert("saved successfully !"));
+                    .then(res => {
+                       alert("saved successfully !");
+                       props.setUserFavorites(favorites);
+                    });
             }}>Save</button>
 
             <button onClick={() => {

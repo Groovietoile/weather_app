@@ -5,7 +5,7 @@ const Conditions = (props) => {
         <div>
             <div>
                 <p><strong>{props.responseObj.response?.place?.name}</strong></p>
-                <p>It is currently {Math.round(props.responseObj.response?.ob?.tempC)} °C out with {props.responseObj.response?.ob?.weather}.</p>
+                <p>It is currently {Math.round(props.responseObj.response?.ob?.tempC)} °C and {props.responseObj.response?.ob?.weather}.</p>
             </div>
         </div>
     )

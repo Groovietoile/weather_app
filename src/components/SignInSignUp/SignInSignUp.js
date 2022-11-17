@@ -1,12 +1,10 @@
+import { Redirect, useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-// import { useHistory } from "react-router-dom";
-// import Favorites from '../Favorites/Favorites';
-// import {withRouter} from 'react-router-dom';
 
 // props = setIsSignedIn, users, setUserId
 
 const SignInSignUp = (props) => {
-    // const history = useHistory();
+    let history = useHistory();
 
     function onSignIn(e) {
         e.preventDefault();
@@ -21,12 +19,7 @@ const SignInSignUp = (props) => {
                 alert("Signed in successfully !");
                 props.setIsSignedIn(true);
                 props.setUserId(user[0].id);
-                // TODO : this changes only the url
-                // window.history.replaceState(null, '', 'http://localhost:3000/favorites');
-                // history.push('/favorites');
-                // navigate("/favorites"); 
-                // this.props.history.push('http://localhost:3000/favorites');
-                // props.history.push("/favorites");
+                history.push(`/favorites`);
             }
             else {
                 alert("Incorrect password.");
@@ -51,6 +44,7 @@ const SignInSignUp = (props) => {
         }
 
         else {
+            let newUserId = uuidv4();
             fetch('http://localhost:8000/users/', {
                 method: 'POST',
                 headers: {
@@ -58,14 +52,19 @@ const SignInSignUp = (props) => {
                 },
                 body: JSON.stringify(
                     {
-                        "id": uuidv4(),
+                        "id": newUserId,
                         "username": username,
                         "password": pwd,
                         "favorites": []
                     }
                 )
             }).then(res => res.json())
-                .then(res => alert("Signed up successfully !"));
+                .then(res => {
+                    alert("Signed up successfully !");
+                    props.setIsSignedIn(true);
+                    props.setUserId(newUserId);
+                    history.push(`/favorites`);
+                });
         }
     }
 

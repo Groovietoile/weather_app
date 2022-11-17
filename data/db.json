@@ -6,26 +6,8 @@
       "password": "test",
       "favorites": [
         {
-          "id": "i1",
-          "city": "c1"
-        },
-        {
-          "id": "54cbeb8e-b0a3-4174-9926-78b5a28dd017",
-          "city": {
-            "city": "bordeau, fr"
-          }
-        },
-        {
-          "id": "298fcfa9-4411-432b-a15a-d3b39a89a846",
-          "city": "a"
-        },
-        {
-          "id": "b8d6f589-8f9e-4bdb-9385-7531ea7c753e",
-          "city": "b"
-        },
-        {
-          "id": "0def6ca3-5d27-44c0-85b3-ce5c46cf18ba",
-          "city": "c"
+          "id": "2ecabf06-88e7-430e-b315-9540d78ebfc7",
+          "city": "bordeau, fr"
         }
       ]
     },
@@ -43,6 +25,18 @@
           "city": "montreal, canada"
         }
       ]
+    },
+    {
+      "id": "048b99ae-35f8-4bfa-8896-31a5a7d28705",
+      "username": "maria",
+      "password": "pwd",
+      "favorites": []
+    },
+    {
+      "id": "65ef6afc-fad5-47b1-afe0-34cc69fbeb20",
+      "username": "hello",
+      "password": "world",
+      "favorites": []
     }
   ]
 }
