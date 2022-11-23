@@ -17,3 +17,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - ip-api to get the user's ip adress and get their current location
 - aerisweather1 to get the weather at a location "city, country"
+
+## TODO
+
+- add style and use MUI
+- JS to TS
+- add error messages
+- put requests in a file (better app architecture ?)
